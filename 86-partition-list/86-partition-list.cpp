@@ -11,32 +11,25 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        ListNode* dummy = new ListNode(-201);
-        ListNode* dummyTail = dummy;
+        ListNode left(0);
+        ListNode right(0);
         
-        ListNode* temp = head;
-        while(temp){
-            if(temp->val<x){
-                ListNode* newNode = new ListNode(temp->val);
-                dummyTail->next = newNode;
-                dummyTail = newNode;
-            }
-            temp = temp->next;
-        }
-        // ListNode* newNode = new ListNode(x);
-        // dummyTail->next = newNode;
-        // dummyTail = newNode;
-        temp = head;
-        // int flag = 0;
+        ListNode* p1 = &left;
+        ListNode* p2 = &right;
         
-        while(temp){
-           if(temp->val>=x){
-                ListNode* newNode = new ListNode(temp->val);
-                dummyTail->next = newNode;
-                dummyTail = newNode;
+        while(head){
+            if(head->val < x){
+                p1->next = head;
+                p1 = p1->next;
+            }else{
+                p2->next = head;
+                p2 = p2->next;
             }
-            temp = temp->next;
+            head = head->next;
         }
-        return dummy->next;
+        
+        p2->next = NULL;
+        p1->next = right.next;
+        return left.next;
     }
 };
