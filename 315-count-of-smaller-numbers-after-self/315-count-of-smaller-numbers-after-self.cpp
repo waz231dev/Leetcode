@@ -29,18 +29,21 @@ private:
         int i = left;
         int j = mid+1;
         int k = 0;
+        int cnt = 0;
         while(i<=mid && j <= right){
             
             if(v[i].first <= v[j].first){
-                temp[k++] = v[j++];
-            }else{
-                count[v[i].second] += right-j+1;
+                count[v[i].second]+= cnt;
                 temp[k++] = v[i++];
+            }else{
+                cnt++;
+                temp[k++] = v[j++];
             }
         }
         
         while(i<=mid){
-           temp[k++]=v[i++];
+            count[v[i].second]+= cnt;
+            temp[k++]=v[i++];
         }
         while(j<=right){
            temp[k++]=v[j++];
