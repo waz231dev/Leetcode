@@ -33,16 +33,14 @@ private:
         while(i<=mid && j <= right){
             
             if(v[i].first <= v[j].first){
-                count[v[i].second]+= cnt;
-                temp[k++] = v[i++];
-            }else{
-                cnt++;
                 temp[k++] = v[j++];
+            }else{
+                count[v[i].second] += right-j+1;
+                temp[k++] = v[i++];
             }
         }
         
         while(i<=mid){
-            count[v[i].second]+= cnt;
             temp[k++]=v[i++];
         }
         while(j<=right){
