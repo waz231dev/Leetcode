@@ -1,16 +1,15 @@
 class MyCalendar {
-    unordered_map<int,int> bookings;
+    map<int,int> bookings;
 public:
     MyCalendar() {
         
     }
     
     bool book(int start, int end) {
-        for(auto it : bookings){
-            if(!(start>=it.second) && !(it.first >= end))
-                return false;
-        }
-        bookings[start] = end;
+        auto slot = bookings.upper_bound(start);
+        if(slot != bookings.end() and slot->second < end)
+            return false;
+        bookings[end] = start;
         return true;
     }
 };
