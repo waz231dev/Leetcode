@@ -11,30 +11,24 @@
  */
 class Solution {
 public:
-    bool isValidLeft(TreeNode* left,int node){
-        if(!left)
-            return true;
-        if(left->val >= node)
-            return false;
-        
-        return isValidLeft(left->left,node) && isValidLeft(left->right,node);
-    }
-    
-    bool isValidRight(TreeNode* right,int node){
-        if(!right)
-            return true;
-        if(right->val <= node)
-            return false;
-        
-        return isValidRight(right->left,node) && isValidRight(right->right,node);
-    }
     bool isValidBST(TreeNode* root) {
-        if(!root)
-            return true;
         
-        if(!isValidLeft(root->left,root->val) || !isValidRight(root->right,root->val))
-            return false;
-        
-        return isValidBST(root->left) && isValidBST(root->right);
+        TreeNode* curr = root;
+        stack<TreeNode*> st;
+        TreeNode* prev = NULL;
+        while(curr || !st.empty()){
+            if(curr){
+                st.push(curr);
+                curr = curr->left;
+            }else{
+                curr = st.top();
+                st.pop();
+                if(prev && curr->val <= prev->val)
+                    return false;
+                prev = curr;
+                curr = curr->right;                
+            }
+        }
+        return true;
     }
 };
