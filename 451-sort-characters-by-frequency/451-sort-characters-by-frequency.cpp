@@ -9,18 +9,19 @@ public:
             freq[c]++;
         }
         
-        vector<pair<char,int>> V(freq.begin(),freq.end());
-        // for(auto it : freq){
-        //     V.push_back(it);
-        // }
+        vector<string> buckt(s.size()+1,"");
         
-        sort(V.begin(),V.end(),comp);
-        string ans = "";
-        for(int i = 0 ; i < V.size() ; i++){
-            for(int j = 0 ; j < V[i].second ; j++){
-                ans += V[i].first;
+        for(auto it : freq){
+            int count = it.second;
+            char c = it.first;
+            buckt[count] += string(count,c);
+        }
+        string res = "";
+        for(int i = s.size() ; i > 0 ; i--){
+            if(!buckt[i].empty()){
+                res += buckt[i];
             }
         }
-        return ans;
+        return res;
     }
 };
