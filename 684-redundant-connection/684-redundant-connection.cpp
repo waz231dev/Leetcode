@@ -1,21 +1,20 @@
 class Solution {
 public:
     bool isCycleHelper(vector<int> adj[],int src,vector<int>& vis){
-        queue<pair<int,int>> q;
-        q.push({src,-1});
-        vis[src] = 1;
+        queue<int> q;
+        q.push(src);
+    
         while(!q.empty()){
-            int node = q.front().first;
-            int parent = q.front().second;
+            int node = q.front();
             q.pop();
             
+            if(vis[node])
+                return true;
+            
+            vis[node] = 1;
             for(auto it : adj[node]){
                 if(!vis[it]){
-                    vis[it] = 1;
-                    q.push({it,node});
-                }else if(it != parent){
-                    // cout<<it<<" "<<parent;
-                    return true;
+                    q.push(it);
                 }
             }
             
