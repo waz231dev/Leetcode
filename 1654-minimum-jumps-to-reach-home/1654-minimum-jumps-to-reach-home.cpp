@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[7001][2];
+    int dp[6001][2];
     int solve(int pos,int a,int b,int x,unordered_set<int>& forb,int back){
         
         if(pos == x)
