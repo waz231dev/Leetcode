@@ -1,12 +1,12 @@
 class Solution {
 public:
-    int dfs(int node, vector<int> adj[], vector<int>& vis,unordered_set<int>& res){
+    int dfs(int node, vector<int> adj[], vector<int>& vis){
         vis[node] = true;
         int cnt = 1;
         
         for(auto it : adj[node]){
-            if(!vis[it] && res.find(it) == res.end()){
-                cnt += dfs(it,adj,vis,res);
+            if(!vis[it]){
+                cnt += dfs(it,adj,vis);
             }
         }
         return cnt;
@@ -20,7 +20,9 @@ public:
             adj[it[1]].push_back(it[0]);
         }
         vector<int> vis(n,0);
-        unordered_set<int> res(restricted.begin(),restricted.end());
-        return dfs(0,adj,vis,res);
+        for(int i = 0 ; i < restricted.size() ; i++){
+            vis[restricted[i]] = 1;
+        }
+        return dfs(0,adj,vis);
     }
 };
