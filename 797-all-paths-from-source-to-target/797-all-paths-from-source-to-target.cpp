@@ -7,7 +7,7 @@ public:
         if(node == graph.size()-1){
             ans.push_back(path);
         }
-        for(auto it : graph[node]){
+        else for(auto it : graph[node]){
             dfs(graph,it,vis,path);
         }
         path.pop_back();
