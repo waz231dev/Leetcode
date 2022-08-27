@@ -35,7 +35,7 @@ public:
     ListNode* rotateRight(ListNode* head, int k) {
         int len = length(head);
         
-        if(k == 0 || k == len || len == 0 || k%len == 0)
+        if(len == 0 || k%len == 0)
             return head;
         head = reverse(head);
         ListNode* temp = head;
