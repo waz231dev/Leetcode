@@ -1,12 +1,4 @@
 class Solution {
-    int digitCount(int num){
-        int cnt = 0;
-        while(num){
-            cnt++;
-            num /= 10;
-        }
-        return cnt;
-    }
 public:
     void solve(int num,int n,int k,vector<int>& res){
         if(n == 0){
