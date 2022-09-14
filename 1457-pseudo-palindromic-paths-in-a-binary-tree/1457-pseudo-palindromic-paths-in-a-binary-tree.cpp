@@ -12,24 +12,21 @@
 class Solution {
     void solve(TreeNode* root,vector<int>& freq,int& ans){
         if(!root) return;
+        
+        freq[root->val]++;
         if(!root->left && !root->right){
-            // cout<<root->val<<" ";
-            freq[root->val]++;
-            int f1 = 0;
+            int odd = 0;
             for(int i = 0 ; i < 10 ; i++){
-                // cout<<freq[i]<<" ";
                 if(freq[i]%2==1){
-                    f1++;
+                    odd++;
                 }
             }
-            // cout<<endl;
-            if(f1<=1)ans++;
-            freq[root->val]--;
-            return;
+            if(odd<=1)ans++;
         }
-        freq[root->val]++;
+        
         solve(root->left,freq,ans);
         solve(root->right,freq,ans);
+        
         freq[root->val]--;
     }
 public:
