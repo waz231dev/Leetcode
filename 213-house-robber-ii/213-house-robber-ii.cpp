@@ -1,23 +1,21 @@
 class Solution {
-    int solve(vector<int>& nums,int ind,int base,vector<int>& dp){
-        if(ind == base) return nums[ind];
-        if(ind < base) return 0;
-        
-        if(dp[ind] != -1) return dp[ind];
-        int pick = nums[ind] + solve(nums,ind-2,base,dp);
-        int notpick = solve(nums,ind-1,base,dp);
-        
-        return dp[ind] = max(pick,notpick);
+    int solve(vector<int>& nums,int left,int right){
+        vector<int> dp(2);
+        dp[0] = nums[left];
+        dp[1] = max(nums[left],nums[left+1]);
+        for(int i = left+2 ; i <= right ; i++){        
+            dp[(i-left)%2] = max(dp[(i-left-1)%2],nums[i] + dp[(i-left-2)%2]);
+        }
+        return dp[(right-left)%2];
     }
 public:
     int rob(vector<int>& nums) {
         
         int n = nums.size();
         if(n == 1) return nums[0];
-        vector<int> dp(n,-1);
-        int ans1 = solve(nums,n-2,0,dp);
-        fill(dp.begin(),dp.end(),-1);
-        int ans2 = solve(nums,n-1,1,dp);
-        return max(ans1,ans2);
+        if(n == 2) return max(nums[0],nums[1]);
+        // int ans = solve(nums,1,n-1);
+        // return ans;
+        return max(solve(nums,0,n-2),solve(nums,1,n-1));
     }
 };
