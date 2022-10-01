@@ -1,18 +1,18 @@
 class Solution {
-    int solve(string& s,int ind,vector<int>& dp){
-        if(ind < 0)
-            return 1;
-        if(s[ind] == '0')
-            return 0;
-        if(dp[ind] != -1) return dp[ind];
-        int left = solve(s,ind-1,dp);
-        int right = 0;
-        if(ind >= 1 &&(s[ind-1] == '1' || (s[ind-1] == '2' && s[ind] <= '6'))){
-            right = solve(s,ind-2,dp);
-        }
-        // cout<<left<<endl;
-        return dp[ind] = left+right;
-    }
+    // int solve(string& s,int ind,vector<int>& dp){
+    //     if(ind < 0)
+    //         return 1;
+    //     if(s[ind] == '0')
+    //         return 0;
+    //     if(dp[ind] != -1) return dp[ind];
+    //     int left = solve(s,ind-1,dp);
+    //     int right = 0;
+    //     if(ind >= 1 &&(s[ind-1] == '1' || (s[ind-1] == '2' && s[ind] <= '6'))){
+    //         right = solve(s,ind-2,dp);
+    //     }
+    //     // cout<<left<<endl;
+    //     return dp[ind] = left+right;
+    // }
 public:
     int numDecodings(string s) {
         int n = s.size();
