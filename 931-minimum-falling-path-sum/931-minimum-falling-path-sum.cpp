@@ -17,20 +17,20 @@ public:
         int n = matrix[0].size();
         int ans = INT_MAX;
         for(int k = 0 ; k < n ; k++){
-            vector<vector<int>> dp(m,vector<int>(n));
+            vector<vector<int>> dp(2,vector<int>(n));
             for(int i = 0 ; i < m ; i++){
                 for(int j = 0 ; j < n ; j++){
                     if(i == 0) dp[i][j] = matrix[i][j];
                     else{
                         int left = INT_MAX,right = INT_MAX,up = INT_MAX;
-                        if(j > 0) left = dp[i-1][j-1];
-                        if(j < n-1) right = dp[i-1][j+1];
-                        up = dp[i-1][j];
-                        dp[i][j] = min(up,min(left,right))+matrix[i][j];
+                        if(j > 0) left = dp[(i-1)&1][j-1];
+                        if(j < n-1) right = dp[(i-1)&1][j+1];
+                        up = dp[(i-1)&1][j];
+                        dp[i&1][j] = min(up,min(left,right))+matrix[i][j];
                     }
                 }
             }
-            ans = min(ans,dp[n-1][k]);
+            ans = min(ans,dp[(n-1)&1][k]);
         }
         return ans;
     }
