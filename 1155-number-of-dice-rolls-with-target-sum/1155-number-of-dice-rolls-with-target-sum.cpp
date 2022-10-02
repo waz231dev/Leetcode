@@ -17,14 +17,11 @@ class Solution {
 public:
     int numRollsToTarget(int n, int f, int target) {
         vector<vector<int>> dp(n+1,vector<int>(target+1,0));
-        for(int i = 0 ; i <= n ; i++){
-            for(int j = 0 ; j <= target ; j++){
+        dp[0][0] = 1;
+        for(int i = 1 ; i <= n ; i++){
+            for(int j = 1 ; j <= target ; j++){
                 for(int k = 1 ; k <= f ; k++){
-                    if(i == 0){
-                        if(j == 0) dp[i][j] = 1;
-                        else dp[i][j] = 0;
-                    } 
-                    else if(j>=k)dp[i][j] = (dp[i][j]%mod + dp[i-1][j-k]%mod)%mod;
+                    if(j>=k)dp[i][j] = (dp[i][j]%mod + dp[i-1][j-k]%mod)%mod;
                 }
             }
         }
