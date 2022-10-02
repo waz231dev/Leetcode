@@ -16,7 +16,7 @@ public:
         int m = matrix.size();
         int n = matrix[0].size();
         int ans = INT_MAX;
-        for(int k = 0 ; k < n ; k++){
+        
             vector<vector<int>> dp(2,vector<int>(n));
             for(int i = 0 ; i < m ; i++){
                 for(int j = 0 ; j < n ; j++){
@@ -30,8 +30,11 @@ public:
                     }
                 }
             }
+        
+        for(int k = 0 ; k < n ; k++){
             ans = min(ans,dp[(n-1)&1][k]);
         }
+            
         return ans;
     }
 };
