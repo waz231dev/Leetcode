@@ -31,7 +31,7 @@ public:
                     profit = max(buy,notBuy);
                 }else{
                     int sell = prices[ind];
-                    if(ind+2 <= n) sell += dp[(ind+2)%3][1];
+                    sell += dp[(ind+2)%3][1];
                     int notSell = dp[(ind+1)%3][0];
                     profit = max(sell,notSell);
                 }
