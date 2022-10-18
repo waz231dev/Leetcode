@@ -1,11 +1,4 @@
 class Solution {
-//     void solve(int n,string asf){
-//         if(n == 1){
-//             // return "1";
-//         }
-        
-        
-//     }
 public:
     string countAndSay(int n) {
         if(n == 1) return "1";
