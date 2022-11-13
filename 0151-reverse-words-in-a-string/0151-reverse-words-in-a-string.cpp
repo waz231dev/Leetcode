@@ -31,10 +31,13 @@ public:
             start = k+1;
         }
         reverse(s,start,j-1);
-        string ans = "";
-        for(int k = 0 ; k < j ; k++){
-            ans += s[k];
-        }
-        return ans;
+        
+        s.resize(j);
+        return s;
+        // string ans = "";
+        // for(int k = 0 ; k < j ; k++){
+        //     ans += s[k];
+        // }
+        // return ans;
     }
 };
