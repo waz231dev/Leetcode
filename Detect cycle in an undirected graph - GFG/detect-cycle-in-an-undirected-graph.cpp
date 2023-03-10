@@ -4,27 +4,37 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution {
-    bool isCycle(int src,vector<int> adj[],vector<int>& vis){
+    // bool isCycle(int src,vector<int> adj[],vector<int>& vis){
+    //     vis[src] = 1;
+    //     queue<pair<int,int>> q;
+    //     q.push({src,-1});
+    //     while(!q.empty()){
+    //         auto front = q.front();
+    //         q.pop();
+    //         int node = front.first;
+    //         int par = front.second;
+    //         for(auto child : adj[node]){
+    //             if(child != par){
+    //                 if(!vis[child]){
+    //                     q.push({child,node});
+    //                     vis[child] = 1;
+    //                 }else{
+    //                     return true;
+    //                 }
+    //             }
+    //         }
+    //     }
+        
+    //     return false;
+    // }
+    bool isCycle(int src,vector<int> adj[],vector<int>& vis,int par){
+        if(vis[src]) return true;
         vis[src] = 1;
-        queue<pair<int,int>> q;
-        q.push({src,-1});
-        while(!q.empty()){
-            auto front = q.front();
-            q.pop();
-            int node = front.first;
-            int par = front.second;
-            for(auto child : adj[node]){
-                if(child != par){
-                    if(!vis[child]){
-                        q.push({child,node});
-                        vis[child] = 1;
-                    }else{
-                        return true;
-                    }
-                }
+        for(auto child : adj[src]){
+            if(child != par){
+                if(isCycle(child,adj,vis,src)) return true;
             }
         }
-        
         return false;
     }
   public:
@@ -33,7 +43,7 @@ class Solution {
         // Code here
         vector<int> vis(V);
         for(int i = 0 ; i < V ; i++){
-            if(!vis[i] && isCycle(i,adj,vis)) return true;
+            if(!vis[i] && isCycle(i,adj,vis,-1)) return true;
         }
         return false;
     }
